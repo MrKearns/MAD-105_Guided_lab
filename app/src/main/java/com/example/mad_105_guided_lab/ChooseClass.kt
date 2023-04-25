@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.os.IResultReceiver._Parcel
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.RadioButton
@@ -86,10 +87,10 @@ class ChooseClass : AppCompatActivity() {
             var radio3Text = ""
             var radio4Text = ""
 
-            rg1 = findViewById(R.id.radioGroup)
-            rg2 = findViewById(R.id.radioGroup2)
-            rg3 = findViewById(R.id.radioGroup3)
-            rg4 = findViewById(R.id.radioGroup4)
+            rg1 = findViewById<RadioGroup>(R.id.radioGroup)
+            rg2 = findViewById<RadioGroup>(R.id.radioGroup2)
+            rg3 = findViewById<RadioGroup>(R.id.radioGroup3)
+            rg4 = findViewById<RadioGroup>(R.id.radioGroup4)
 
             var selectedTime1 = 0
             var selectedTime2 = 0
@@ -100,24 +101,28 @@ class ChooseClass : AppCompatActivity() {
                 ctv1Text = ctv1!!.text.toString()
                 selectedTime1 = rg1!!.checkedRadioButtonId
                 radioButton = findViewById<RadioButton>(selectedTime1)
+                radio1Text = radioButton.text.toString()
             }
 
             if (ctv2!!.isChecked) {
                 ctv2Text = ctv2!!.text.toString()
                 selectedTime2 = rg2!!.checkedRadioButtonId
                 radioButton = findViewById<RadioButton>(selectedTime2)
+                radio2Text = radioButton.text.toString()
             }
 
             if (ctv3!!.isChecked) {
                 ctv3Text = ctv3!!.text.toString()
                 selectedTime3 = rg3!!.checkedRadioButtonId
                 radioButton = findViewById<RadioButton>(selectedTime3)
+                radio3Text = radioButton.text.toString()
             }
 
             if (ctv4!!.isChecked) {
                 ctv4Text = ctv4!!.text.toString()
                 selectedTime4 = rg4!!.checkedRadioButtonId
                 radioButton = findViewById<RadioButton>(selectedTime4)
+                radio4Text = radioButton.text.toString()
             }
 
             if (radioCheck(selectedTime1, selectedTime2, selectedTime3, selectedTime4)){
@@ -131,13 +136,13 @@ class ChooseClass : AppCompatActivity() {
                     putExtra ("BirthDate", birthDate)
                     putExtra ("isDegreeCert", isDegreeCert)
                     putExtra ("Class1", ctv1Text)
-                    putExtra ("Selected!", radio1Text)
+                    putExtra ("Selected1", radio1Text)
                     putExtra ("Class2", ctv2Text)
                     putExtra ("Selected2", radio2Text)
                     putExtra ("Class3", ctv3Text)
                     putExtra ( "Selected3", radio3Text)
                     putExtra ("Class4", ctv4Text)
-                    putExtra ("Selected", radio4Text)
+                    putExtra ("Selected4", radio4Text)
                     putExtra ("degreeCert", degreeCertification)
                 }
 
@@ -241,6 +246,7 @@ class ChooseClass : AppCompatActivity() {
                 enableDisable(ctv1, rb1, rb2, Color.WHITE, false)
             } else {
                 enableDisable(ctv1, rb1, rb2, Color.GRAY, true)
+                rb1!!.isChecked = true
             }
         }
 
@@ -249,6 +255,7 @@ class ChooseClass : AppCompatActivity() {
                 enableDisable(ctv2, rb3, rb4, Color.WHITE, false)
             } else {
                 enableDisable(ctv2, rb3, rb4, Color.GRAY, true)
+                rb3!!.isChecked = true
             }
         }
 
@@ -257,6 +264,7 @@ class ChooseClass : AppCompatActivity() {
                 enableDisable(ctv3, rb5, rb6, Color.WHITE, false)
             } else {
                 enableDisable(ctv3, rb5, rb6, Color.GRAY, true)
+                rb5!!.isChecked = true
             }
         }
 
@@ -265,6 +273,7 @@ class ChooseClass : AppCompatActivity() {
                 enableDisable(ctv4, rb7, rb8, Color.WHITE, false)
             } else {
                 enableDisable(ctv4, rb7, rb8, Color.GRAY, true)
+                rb7!!.isChecked = true
             }
         }
 
@@ -277,9 +286,10 @@ class ChooseClass : AppCompatActivity() {
         rb1!!.isEnabled = state
         rb2!!.isEnabled = state
 
-        rb1.isChecked = state
+        rb2!!.isChecked = state
 
         if (!state){
+            rb1.isChecked = state
             rb2.isChecked = state
         }
 
